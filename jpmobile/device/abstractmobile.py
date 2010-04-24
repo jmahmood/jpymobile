@@ -2,8 +2,9 @@
 
 class AbstractMobile:
     def __init__(self, request):
-        self.request = request
-    
+        self.env = request
+        self.valid = False
+
     def position(self):
         return False
     
@@ -17,7 +18,7 @@ class AbstractMobile:
         return
     
     def valid_ip(self, remote_address):
-        addresses = []
+        addresses = self.IP_ADDRESSES
         return remote_address in addresses
     
     # This will return a display class instance.

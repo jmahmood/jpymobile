@@ -2,19 +2,18 @@
 from . import docomo
 from . import au
 from . import softbank
+import os
 
 
 def get_carriers():
     return [
-        'docomo',
-        'au',
-        'softbank'
+        'docomo'
     ]
 
 def factory(type):
     if type == 'docomo':
-        return docomo.Docomo()
+        return docomo.Docomo(os.environ)
     if type == 'au':
-        return au.AU()
+        return au.AU(os.environ)
     if type == 'softbank':
-        return softbank.Softbank()
+        return softbank.Softbank(os.environ)
