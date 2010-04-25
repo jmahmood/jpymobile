@@ -4,7 +4,16 @@ import re
 import os
 
 class Docomo(abstractmobile.AbstractMobile, object):
-    IP_ADDRESSES = []
+    IP_ADDRESSES = [
+        '210.153.84.0/24',
+        '210.136.161.0/24',
+        '210.153.86.0/24',
+        '124.146.174.0/24',
+        '124.146.175.0/24',
+        '202.229.176.0/24',
+        '202.229.177.0/24',
+        '202.229.178.0/24'
+    ]
     DISPLAY_INFO = {}
     USER_AGENT_REGEXP = """/^DoCoMo/"""
     MAIL_ADDRESS_REGEXP = """/^.+@docomo\.ne\.jp$/"""
