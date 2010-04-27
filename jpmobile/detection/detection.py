@@ -2,7 +2,7 @@
 from ..device import carriers
 
 def is_mobile():
-    return mobile(str) != False
+    return mobile() != False
     
 def mobile():
     mobilecarriers = carriers.get_carriers()
