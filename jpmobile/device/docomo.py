@@ -2,6 +2,7 @@
 import abstractmobile
 import re
 import os
+from .. import display
 
 class Docomo(abstractmobile.AbstractMobile, object):
     from ip_info_docomo import IP_ADDRESSES
@@ -22,6 +23,9 @@ class Docomo(abstractmobile.AbstractMobile, object):
     # They use a map class, but we don't have to
     # worry about this for now.
     def position(self, lat=False, lon=False, geo=False):
+        
+            
+
         return False
     
     def serialnumber(self):
@@ -61,19 +65,27 @@ class Docomo(abstractmobile.AbstractMobile, object):
     def ident_subscriber(self):
         return self.guid or self.icc
     
-    def display_info(self):
-        try:
-            return self.DISPLAY_INFO[self.model_name()]
-        except:
-            return False
     
     def display(self):
-        return False
+        di = self.__display_info()
+
+        if not di:
+            return False
+
+        self.display = display.Display(
+            False,
+            False,
+            di['browser_width'],
+            di['browser_height'],
+            di['color_p'],
+            di['colors']
+        );
+        return True
     
     def supports_cookie(self):
         return false
     
-    def model_name(self):
+    def __model_name(self):
         try:
             agent = self.env['HTTP_USER_AGENT']
             docomo20 = re.search('/^DoCoMo\/2.0 (.+)\(/',agent)
@@ -89,3 +101,8 @@ class Docomo(abstractmobile.AbstractMobile, object):
             # now.
             return False
         
+    def __display_info(self):
+        try:
+            return self.DISPLAY_INFO[self.__model_name()]
+        except:
+            return False
